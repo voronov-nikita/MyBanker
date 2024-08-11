@@ -1,6 +1,6 @@
-// 
+//
 // Основной файл разработки и запуска приложения
-// 
+//
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -9,47 +9,49 @@ import React from "react";
 // импорт отдельных модулей - страниц
 import { HomeScreen } from "./src/pages/HomePage";
 import { AuthScreen } from "./src/pages/AuthPage";
+import { ForgotPasswordScreen } from "./src/pages/ForgotPasswordPage";
 
-// импорт отдельных компонентов для приложения
-// import { AuthButton }
+import Test from "./src/Test";
 
 // конфигуратор навигации
 const Stack = createStackNavigator();
 
-const App = () => {
+export default function App() {
 	return (
+		// <Test />
 		<NavigationContainer>
 			<Stack.Navigator
-				initialRouteName="Home"
+				initialRouteName="Auth"
 				screenOptions={{
 					headerStyle: {
-						backgroundColor: "#ff00ff",
+						backgroundColor: "#ffffff",
 					},
 				}}
 			>
 				<Stack.Screen
-					name="Home"
-					component={HomeScreen}
+					name="Auth"
+					component={AuthScreen}
 					options={{
-						headerTitle: " ",
-						// headerRight: () => <AuthButton />,
+						headerShown: false,
 					}}
 				/>
 
 				<Stack.Screen
-					name="Auth"
-					component={AuthScreen}
+					name="ForgotPassword"
+					component={ForgotPasswordScreen}
 					options={{
-						headerTitle: " ",
-						headerStyle: {
-							backgroundColor: "#ffffff00",
-						},
+						title: " ",
 					}}
 				/>
 
+				<Stack.Screen
+					name="Home"
+					component={HomeScreen}
+					options={{
+						headerShown: false,
+					}}
+				/>
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
-};
-
-export default App;
+}
