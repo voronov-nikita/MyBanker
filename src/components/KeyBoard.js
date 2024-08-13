@@ -1,11 +1,12 @@
 //
 // Компонент клавиатуры для входа в систему.
+// Здесь так же можно
 //
 
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
-import CONFIG from "../config";
+import { CONFIG } from "../config";
 
 export const KeyBoardPin = ({ navigation }) => {
 	const [pin, setPin] = useState("");
@@ -13,7 +14,7 @@ export const KeyBoardPin = ({ navigation }) => {
 	const [infoText, setInfo] = useState("Введите PIN-код для входа");
 
 	useEffect(() => {
-		if (pin.length === 4 && pin != "1234") {
+		if (pin.length === 4 && pin != CONFIG.data.password) {
 			setInfo("Неверный PIN");
 			setTextColor("#ff0000");
 			handleClear();

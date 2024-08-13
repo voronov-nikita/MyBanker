@@ -1,46 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, Button, ActivityIndicator } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import React from "react";
+import { View, Button, Alert } from "react-native";
 
-export const Test = () => {
-	const [isFirstLaunch, setIsFirstLaunch] = useState(null); // Указываем начальное значение как null
-
-	useEffect(() => {
-		const checkFirstLaunch = async () => {
-			try {
-				const hasLaunched = await AsyncStorage.getItem("hasLaunched");
-				if (hasLaunched === null) {
-					// Если значение null, значит приложение запускается впервые
-					await AsyncStorage.setItem("hasLaunched", "true"); // Сохраняем флаг, что приложение запустилось
-					setIsFirstLaunch(true);
-				} else {
-					// Приложение уже запускалось ранее
-					setIsFirstLaunch(false);
-				}
-			} catch (error) {
-				console.error("Ошибка при доступе к AsyncStorage:", error);
-			}
-		};
-
-		checkFirstLaunch();
-	}, []);
-
-	if (isFirstLaunch === null) {
-		// Показать индикатор загрузки, пока мы ждем проверки
-		return <ActivityIndicator size="large" color="#0000ff" />;
-	}
+const App = () => {
+	const showAlert = () => {
+		Alert.alert(
+			"Внимание", // Заголовок уведомления
+			"Вы уверены, что хотите продолжить?", // Сообщение уведомления
+			[
+				{
+					text: "Нет",
+					onPress: () => console.log("Отменено"),
+					style: "cancel", // Кнопка отмены
+				},
+				{
+					text: "Да",
+					onPress: () => console.log("Подтверждено"),
+				},
+			],
+			{ cancelable: true } // Уведомление можно закрыть нажатием вне его или кнопкой Назад
+		);
+	};
 
 	return (
-		<View>
-			{isFirstLaunch ? (
-				<>
-					<Text>Это первый запуск приложения!</Text>
-				</>
-			) : (
-				<>
-					<Text>Добро пожаловать обратно!</Text>
-				</>
-			)}
+		<View style={{ marginTop: 50 }}>
+			<Button title="Показать уведомление" onPress={showAlert} />
 		</View>
 	);
 };
+
+export default App;

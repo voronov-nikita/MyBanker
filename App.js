@@ -9,6 +9,7 @@ import React from "react";
 // импорт отдельных модулей - страниц
 import { HomeScreen } from "./src/pages/HomePage";
 import { AuthScreen } from "./src/pages/AuthPage";
+import { ChangePinScreen } from "./src/pages/ChangePinPage";
 import { ForgotPasswordScreen } from "./src/pages/ForgotPasswordPage";
 
 import Test from "./src/Test";
@@ -39,6 +40,14 @@ export default function App() {
 				<Stack.Screen
 					name="ForgotPassword"
 					component={ForgotPasswordScreen}
+					options={{
+						title: " ",
+					}}
+				/>
+
+				<Stack.Screen
+					name="ChangePIN"
+					component={ChangePinScreen}
 					options={{
 						title: " ",
 					}}

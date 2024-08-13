@@ -3,6 +3,9 @@
 // Здесь прописаны глобальные переменные для всех файлов в приложении.
 //
 
-const CONFIG = {
-    
+export const CONFIG = {
+	data: {
+		password: "1234",
+		answerQuestion: "python",
+	},
 };
