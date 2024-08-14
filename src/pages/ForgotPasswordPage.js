@@ -1,5 +1,5 @@
 //
-// Страница для востановления пароля.
+// Страница для востановления и сброса пароля.
 //
 
 import { StyleSheet, Text, SafeAreaView, TextInput, View } from "react-native";

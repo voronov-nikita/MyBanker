@@ -9,6 +9,7 @@ import React from "react";
 // импорт отдельных модулей - страниц
 import { HomeScreen } from "./src/pages/HomePage";
 import { AuthScreen } from "./src/pages/AuthPage";
+import { SettingsScreen } from "./src/pages/SettingsPage";
 import { ChangePinScreen } from "./src/pages/ChangePinPage";
 import { ForgotPasswordScreen } from "./src/pages/ForgotPasswordPage";
 
@@ -46,6 +47,14 @@ export default function App() {
 				/>
 
 				<Stack.Screen
+					name="Home"
+					component={HomeScreen}
+					options={{
+						headerShown: false,
+					}}
+				/>
+
+				<Stack.Screen
 					name="ChangePIN"
 					component={ChangePinScreen}
 					options={{
@@ -54,11 +63,9 @@ export default function App() {
 				/>
 
 				<Stack.Screen
-					name="Home"
-					component={HomeScreen}
-					options={{
-						headerShown: false,
-					}}
+					name="Settings"
+					component={SettingsScreen}
+					options={{ headerTitleAlign: "center" }}
 				/>
 			</Stack.Navigator>
 		</NavigationContainer>

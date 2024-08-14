@@ -8,4 +8,13 @@ export const CONFIG = {
 		password: "1234",
 		answerQuestion: "python",
 	},
+
+	iconSize: 26,
+};
+
+export const ICONS = {
+	home: "home",
+	history: "access-time",
+	target: "star",
+	settings: "settings",
 };
