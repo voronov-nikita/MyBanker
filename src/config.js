@@ -10,6 +10,7 @@ export const CONFIG = {
 	},
 
 	iconSize: 26,
+	settingsPath: "../settings.json",
 };
 
 export const ICONS = {

@@ -3,13 +3,22 @@
 // 
 
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Button } from "react-native";
 
+// import { MySw
+
+import { editJSON } from "../logic/editor";
+import { CONFIG } from "../config";
 
 export const SettingsScreen = () => {
+
+	const func = () => {
+		editJSON("../settings.json", "pin", false);
+	}
+
 	return (
 		<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-			<Text>Settings Screen</Text>
+			<Button onPress={func} />
 		</View>
 	);
 }

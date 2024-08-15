@@ -20,54 +20,54 @@ const Stack = createStackNavigator();
 
 export default function App() {
 	return (
-		// <Test />
-		<NavigationContainer>
-			<Stack.Navigator
-				initialRouteName="Auth"
-				screenOptions={{
-					headerStyle: {
-						backgroundColor: "#ffffff",
-					},
-				}}
-			>
-				<Stack.Screen
-					name="Auth"
-					component={AuthScreen}
-					options={{
-						headerShown: false,
-					}}
-				/>
+		<Test />
+		// <NavigationContainer>
+		// 	<Stack.Navigator
+		// 		initialRouteName="Auth"
+		// 		screenOptions={{
+		// 			headerStyle: {
+		// 				backgroundColor: "#ffffff",
+		// 			},
+		// 		}}
+		// 	>
+		// 		<Stack.Screen
+		// 			name="Auth"
+		// 			component={AuthScreen}
+		// 			options={{
+		// 				headerShown: false,
+		// 			}}
+		// 		/>
 
-				<Stack.Screen
-					name="ForgotPassword"
-					component={ForgotPasswordScreen}
-					options={{
-						title: " ",
-					}}
-				/>
+		// 		<Stack.Screen
+		// 			name="ForgotPassword"
+		// 			component={ForgotPasswordScreen}
+		// 			options={{
+		// 				title: " ",
+		// 			}}
+		// 		/>
 
-				<Stack.Screen
-					name="Home"
-					component={HomeScreen}
-					options={{
-						headerShown: false,
-					}}
-				/>
+		// 		<Stack.Screen
+		// 			name="Home"
+		// 			component={HomeScreen}
+		// 			options={{
+		// 				headerShown: false,
+		// 			}}
+		// 		/>
 
-				<Stack.Screen
-					name="ChangePIN"
-					component={ChangePinScreen}
-					options={{
-						title: " ",
-					}}
-				/>
+		// 		<Stack.Screen
+		// 			name="ChangePIN"
+		// 			component={ChangePinScreen}
+		// 			options={{
+		// 				title: " ",
+		// 			}}
+		// 		/>
 
-				<Stack.Screen
-					name="Settings"
-					component={SettingsScreen}
-					options={{ headerTitleAlign: "center" }}
-				/>
-			</Stack.Navigator>
-		</NavigationContainer>
+		// 		<Stack.Screen
+		// 			name="Settings"
+		// 			component={SettingsScreen}
+		// 			options={{ headerTitleAlign: "center" }}
+		// 		/>
+		// 	</Stack.Navigator>
+		// </NavigationContainer>
 	);
 }

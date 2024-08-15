@@ -1,44 +1,43 @@
 //
 // Файл для редактирования JSON файлов напрямую из приложения REACT NATIVE.
-// Таким образом можно будет изменять настройки приложения и сохранять их 
+// Таким образом можно будет изменять настройки приложения и сохранять их
 // с использованием сторонних файлов. Например `settings.js`
 //
 
-import RNFS from "react-native-fs";
+import * as FileSystem from "expo-file-system";
 
-// Путь к файлу
-const path = RNFS.DocumentDirectoryPath + "/data.json";
+// Путь к файлу в локальной системе
+const fileUri = `${FileSystem.documentDirectory}../settings.json`;
 
-// Чтение файла
-const readJSONFile = async () => {
+// Функция для чтения файла
+const readFile = async () => {
 	try {
-		const content = await RNFS.readFile(path, "utf8");
+		const fileExists = await FileSystem.getInfoAsync(fileUri);
+		if (!fileExists.exists) {
+			console.log("Файл не существует");
+			return null;
+		}
+		const content = await FileSystem.readAsStringAsync(fileUri);
 		const jsonData = JSON.parse(content);
-		console.log("Данные:", jsonData);
+		console.log("Содержимое файла:", jsonData);
 		return jsonData;
 	} catch (error) {
-		console.error("Ошибка чтения файла:", error);
+		console.error("Ошибка при чтении файла:", error);
 	}
 };
 
-// Запись файла
-const writeJSONFile = async (data) => {
+// Функция для записи данных в файл
+const writeFile = async (data) => {
 	try {
-		const content = JSON.stringify(data, null, 2);
-		await RNFS.writeFile(path, content, "utf8");
-		console.log("Файл успешно записан");
+		await FileSystem.writeAsStringAsync(fileUri, JSON.stringify(data, null, 2));
+		console.log("Файл успешно сохранен");
 	} catch (error) {
-		console.error("Ошибка записи файла:", error);
+		console.error("Ошибка при записи файла:", error);
 	}
 };
 
-// Пример редактирования JSON
-const editJSON = async () => {
-	const jsonData = await readJSONFile();
-
-	// Вносим изменения
-	jsonData.newKey = "newValue";
-
-	// Записываем изменения обратно в файл
-	await writeJSONFile(jsonData);
+// Пример использования
+export const editJSON = async () => {
+	const data = { pin: false };
+	await writeFile(data); // Сохранение данных
 };
