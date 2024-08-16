@@ -18,7 +18,7 @@ export const KeyBoardPin = ({ navigation }) => {
 			setInfo("Неверный PIN");
 			setTextColor("#ff0000");
 			handleClear();
-		} else if (pin.length === 4 && pin == "1234") {
+		} else if (pin.length === 4 && pin == CONFIG.data.password) {
 			setInfo("Добро пожаловать");
 			setTextColor("#51b155");
 			navigation.replace("Home");

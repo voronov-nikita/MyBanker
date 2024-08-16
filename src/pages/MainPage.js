@@ -5,11 +5,12 @@
 import React from "react";
 import { View, Text } from "react-native";
 
+import { DownButton } from "../buttons/AddButton";
 
-export const MainScreen = () => {
+export const MainScreen = ({ navigation }) => {
 	return (
 		<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-			<Text>Main Screen</Text>
+			<DownButton navigation={navigation} type="home" />
 		</View>
 	);
 }
