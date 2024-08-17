@@ -1,12 +1,13 @@
-// 
-// 
-// 
+//
+//
+//
 
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import { ScrollView, View, Text, TextInput, StyleSheet } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
-import { CreateButton } from "../buttons/CreateButton";
+import { CreateButton, FakeCreacteButton } from "../buttons/CreateButton";
+import { CONFIG } from "../config";
 
 export const AddNewBankScreen = ({ navigation }) => {
 	const [title, setTitle] = useState("");
@@ -21,8 +22,24 @@ export const AddNewBankScreen = ({ navigation }) => {
 		"Вклад",
 	]);
 
+	renderButton = () => {
+		if (title && tag) {
+			return (
+				<CreateButton
+					title={title}
+					tag={tag}
+					comment={comment}
+					navigation={navigation}
+					type="AddBank"
+				/>
+			);
+		} else {
+			return <FakeCreacteButton />;
+		}
+	};
+
 	return (
-		<View style={styles.container}>
+		<ScrollView style={styles.container}>
 			<Text style={styles.title}>Добавить новый счет</Text>
 			<View style={styles.form}>
 				<Text style={styles.label}>Название</Text>
@@ -31,6 +48,7 @@ export const AddNewBankScreen = ({ navigation }) => {
 					placeholder="Название счета"
 					value={title}
 					onChangeText={(text) => setTitle(text)}
+					maxLength={CONFIG.maxLengthInputBank}
 				/>
 
 				<Text style={styles.label}>Тип счета</Text>
@@ -45,21 +63,17 @@ export const AddNewBankScreen = ({ navigation }) => {
 
 				<Text style={styles.label}>Коментарии к счету</Text>
 				<TextInput
-					style={styles.input}
+					style={styles.inputComment}
 					placeholder="Добавьте коментарий"
 					value={comment}
 					onChangeText={(text) => setComment(text)}
+					multiline={true}
 				/>
 			</View>
 			<View style={styles.underButton}>
-				<CreateButton
-					title={title}
-					tag={tag}
-					comment={comment}
-					// navigation={navigation}
-				/>
+				{this.renderButton()}
 			</View>
-		</View>
+		</ScrollView>
 	);
 };
 
@@ -88,6 +102,12 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		paddingHorizontal: 10,
 		paddingVertical: 10,
+	},
+	inputComment: {
+		height: 100,
+		borderColor: "#ccc",
+		borderWidth: 1,
+		paddingHorizontal: 10,
 	},
 
 	underButton: {

@@ -1,15 +1,16 @@
-// 
-// 
-// 
+//
+//
+//
 
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
+import { DownButton } from "../buttons/AddButton";
 
-export const TagetScreen = () => {
+export const TagetScreen = ({ navigation }) => {
 	return (
 		<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-			<Text>List Screen</Text>
+			<DownButton navigation={navigation} type="target" />
 		</View>
 	);
-}
+};
