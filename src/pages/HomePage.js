@@ -8,7 +8,7 @@ import { TagetScreen } from "./TargetPage";
 
 import { SettingsButton } from "../buttons/SettingsButton";
 
-import { ICONS, CONFIG } from "../config";
+import { ICONS, CONFIG, COLORS } from "../config";
 
 const Tab = createBottomTabNavigator();
 
@@ -36,8 +36,8 @@ export const HomeScreen = ({ navigation }) => {
 						/>
 					);
 				},
-				tabBarActiveTintColor: "purple",
-				tabBarInactiveTintColor: "gray",
+				tabBarActiveTintColor: COLORS.home.activeIconColor,
+				tabBarInactiveTintColor: COLORS.home.disactiveIconColor,
 				headerTitleAlign: "center",
 			})}
 		>

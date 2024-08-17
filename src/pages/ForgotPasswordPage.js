@@ -13,33 +13,22 @@ import { CONFIG } from "../config";
 export const ForgotPasswordScreen = ({ navigation }) => {
 	const [answer, setAnswer] = useState("");
 
-	const checkQuestion = (text) => {
-		setAnswer(text);
-	};
-
-	const navigateToChangePIN = () => {
-		console.log(answer);
-		if (answer == CONFIG.data.answerQuestion) {
-			navigation.navigate("ChangePIN");
-		} else {
-			showAlertNotification(
-				titleText = "Внимание",
-				mainText = "Это не верный ответ на контрольный вопрос"
-			);
-		}
-	};
-
 	return (
 		<SafeAreaView style={styles.container}>
-			<Text>Ответьте на контрольный вопрос для сброса PIN кода</Text>
+			<Text style={styles.titleText}>Ответьте на контрольный вопрос</Text>
+
+			<Text style={styles.mainText}>{CONFIG.data.textQuestion[0]}</Text>
+
 			<TextInput
 				style={styles.textInput}
-				placeholder="Текст вопроса"
-				onChangeText={checkQuestion}
+				placeholder="Ответ на контрольный вопрос"
+				onChangeText={(text) => setAnswer(text)}
 				value={answer}
 			/>
 
-			<ResetButton text={"Продолжить"} func={navigateToChangePIN}/>
+			<View style={styles.underButton}>
+				<ResetButton text={answer} navigation={navigation} />
+			</View>
 		</SafeAreaView>
 	);
 };
@@ -47,8 +36,43 @@ export const ForgotPasswordScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "#f0f0f0",
-		alignItems: "center",
-		justifyContent: "center",
+		padding: 15,
+	},
+
+	titleText: {
+		fontSize: 20,
+		fontWeight: "bold",
+
+		marginTop: "5%",
+		marginBottom: "13%",
+		padding: "1%",
+	},
+
+	mainText: {
+		fontSize: 18,
+
+		marginBottom: "10%",
+		padding: "1%",
+
+		textDecorationLine: "underline",
+	},
+	textInput: {
+		height: 90,
+		width: "100%",
+
+		fontSize: 16,
+		borderColor: "#ccc",
+		borderWidth: 1,
+
+		margin: "1%",
+		padding: "10%",
+
+		textAlign: "center"
+	},
+
+	underButton: {
+		flex: 1,
+		justifyContent: "flex-end",
+		marginBottom: 20,
 	},
 });

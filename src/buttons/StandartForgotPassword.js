@@ -1,34 +1,42 @@
 //
-// Кнопка, для сброса пароля
+//
 //
 
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
-
 import { showAlertNotification } from "../components/Notification";
-import { CONFIG } from "../config";
+import { TouchableOpacity, StyleSheet, Text } from "react-native";
 
-export const ResetButton = ({ text, func }) => {
+import { CONFIG, COLORS } from "../config";
+
+export const ResetButton = ({ text, navigation }) => {
+
+	const handlePress = () => {
+		if (text.toLowerCase() == CONFIG.data.answerQuestion.toLowerCase()) {
+			navigation.navigate("ChangePIN");
+		} else {
+			showAlertNotification(
+				"Внимание",
+				"Это не верный ответ на контрольный вопрос"
+			);
+		}
+	};
 
 	return (
-		<TouchableOpacity style={styles.container} onPress={func}>
-			<Text style={styles.text}>{text}</Text>
+		<TouchableOpacity style={styles.button} onPress={handlePress}>
+			<Text style={styles.buttonText}>Продолжить</Text>
 		</TouchableOpacity>
 	);
 };
 
 const styles = StyleSheet.create({
-	text: {
-		textAlign: "center",
-	},
-
-	container: {
-		backgroundColor: "#e3dfb8ff",
-		borderRadius: 20,
-		borderColor: "black",
+	button: {
+		backgroundColor: COLORS.forgotPin.original,
 		padding: 10,
-		margin: 7,
-		borderWidth: 3,
+		borderRadius: 5,
+	},
+	buttonText: {
+		fontSize: 20,
+		color: "#fff",
+		textAlign: "center",
 	},
 });

@@ -6,7 +6,7 @@ import React from "react";
 import { showAlertNotification } from "../components/Notification";
 import { TouchableOpacity, StyleSheet, Text } from "react-native";
 
-import { COLORS, CONFIG } from "../config";
+import { TAGCOLORS, CONFIG, COLORS } from "../config";
 
 export const CreateButton = ({
 	title,
@@ -18,10 +18,10 @@ export const CreateButton = ({
 }) => {
 	const handleCreate = () => {
 		if (type == "AddBank") {
-			console.log(title, tag, COLORS.get(tag), comment);
+			console.log(title, tag, TAGCOLORS.get(tag), comment);
 			navigation.navigate("Main");
 		} else if (type == "AddTarget") {
-			console.log(title, tag, COLORS[tag], comment, targetSum);
+			console.log(title, tag, TAGCOLORS[tag], comment, targetSum);
 			navigation.navigate("Target");
 		}
 	};
@@ -50,12 +50,12 @@ export const FakeCreacteButton = () => {
 
 const styles = StyleSheet.create({
 	fakeButton: {
-		backgroundColor: CONFIG.colorCreateFakeButton,
+		backgroundColor: COLORS.createButton.fake,
 		padding: 10,
 		borderRadius: 5,
 	},
 	button: {
-		backgroundColor: CONFIG.colorCreateButton,
+		backgroundColor: COLORS.createButton.original,
 		padding: 10,
 		borderRadius: 5,
 	},

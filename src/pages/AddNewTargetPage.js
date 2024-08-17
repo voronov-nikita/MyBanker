@@ -58,6 +58,7 @@ export const AddNewTargetScreen = ({ navigation }) => {
 					placeholder="Сумма накопления"
 					value={targetSum}
 					onChangeText={(text) => setSum(text)}
+					keyboardType="numeric"
 				/>
 
 				<Text style={styles.label}>Тип накопления</Text>
