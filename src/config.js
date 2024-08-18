@@ -3,12 +3,12 @@
 // Здесь прописаны глобальные переменные для всех файлов в приложении.
 //
 
-import { getValue } from "./logic/editor";
+// import { getValue } from "./logic/editor";
 
 // Общие конфиги
 export const CONFIG = {
 	data: {
-		password: getValue("pin"),
+		password: "3907",
 		textQuestion: ["Как звали моего хомяка?"],
 		answerQuestion: "python",
 	},

@@ -4,40 +4,23 @@
 // с использованием сторонних файлов. Например `settings.js`
 //
 
-import * as FileSystem from "expo-file-system";
+import { AsyncStorage } from "react-native";
 
-// Путь к файлу в локальной системе
-const fileUri = `${FileSystem.documentDirectory}../settings.json`;
-
-// Функция для чтения файла
-const readFile = async () => {
-	try {
-		const fileExists = await FileSystem.getInfoAsync(fileUri);
-		if (!fileExists.exists) {
-			console.log("Файл не существует");
-			return null;
-		}
-		const content = await FileSystem.readAsStringAsync(fileUri);
-		const jsonData = JSON.parse(content);
-		console.log("Содержимое файла:", jsonData);
-		return jsonData;
-	} catch (error) {
-		console.error("Ошибка при чтении файла:", error);
-	}
+// функция для загрузки каких-то данных в формате ключ-значение в конфигурацию приложения
+export const setValue = async (key, value) => {
+	await AsyncStorage.setItem(key, value);
 };
 
-// Функция для записи данных в файл
-const writeFile = async (data) => {
-	try {
-		await FileSystem.writeAsStringAsync(fileUri, JSON.stringify(data, null, 2));
-		console.log("Файл успешно сохранен");
-	} catch (error) {
-		console.error("Ошибка при записи файла:", error);
-	}
+// функция получения данных по ключу
+export const getValue = async (key) => {
+	const data = await AsyncStorage.getItem(key);
+	return data;
 };
 
-// Пример использования
-export const editJSON = async () => {
-	const data = { pin: false };
-	await writeFile(data); // Сохранение данных
+export const delValue = async (key) => {
+	await AsyncStorage.removeItem("myKey");
+};
+
+export const clearStorage = async () => {
+	await AsyncStorage.clear();
 };

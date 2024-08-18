@@ -16,11 +16,15 @@ import { AddNewTargetScreen } from "./src/pages/AddNewTargetPage";
 import { ForgotPasswordScreen } from "./src/pages/ForgotPasswordPage";
 
 import Test from "./src/Test";
+// import { loading } from "./src/loadingSettings";
 
 // конфигуратор навигации
 const Stack = createStackNavigator();
 
 export default function App() {
+
+	// loading();
+
 	return (
 		// <Test />
 		<NavigationContainer>
