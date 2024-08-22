@@ -1,3 +1,8 @@
+// 
+// Компонент модального отображения информации о счете или цели.
+// Модальное отображение означает, что поверх основного контента в приложении будет еще какой-то.
+// 
+
 import React, { useState } from "react";
 import { Modal, Text, View, TouchableOpacity, StyleSheet } from "react-native";
 

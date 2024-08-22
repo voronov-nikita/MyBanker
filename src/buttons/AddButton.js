@@ -1,3 +1,8 @@
+// 
+// Кнопка "создать". Она необходима для страниц Main и Target, 
+// где имеется возможность добавлять элементы в список.
+// 
+
 import React, { useState } from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 

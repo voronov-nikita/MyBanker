@@ -1,11 +1,11 @@
 // 
-// 
+// Страница настроек приложения. Здесь пользователь может настроить приложение, как ему удобно.
+// Язык программы, тема (светлая или темная), нужен ли ему PIN код, изменить PIN код и т.п
 // 
 
 import React from "react";
 import { View, Text, Button } from "react-native";
 
-// import { MySw
 
 import { editJSON } from "../logic/editor";
 import { CONFIG } from "../config";

@@ -1,3 +1,9 @@
+// 
+// Домашняя страница. Здесь происходят основные действия пользователя.
+// Эта часть кода представляет из себя отдельно взятые части страниц с импортом их элементов
+// Страницы Main, Target, History являются подстраницами этого "второго навитагора"
+// 
+
 import * as React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
