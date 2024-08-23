@@ -4,13 +4,14 @@
 //
 
 import React from "react";
-import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
+import { View, StyleSheet, FlatList, SafeAreaView } from "react-native";
 
 import { DownButton } from "../buttons/AddButton";
 import { ContainerTarget } from "../buttons/ContainerTarget";
+import { useState } from "react";
 
 export const TagetScreen = ({ navigation }) => {
-	const data = [
+	const [data, setData] = useState([
 		{
 			id: 0,
 			title: "new",
@@ -39,28 +40,7 @@ export const TagetScreen = ({ navigation }) => {
 			targetSum: 1000000,
 			tag: "накопительный счет",
 		},
-		{
-			id: 4,
-			title: "На мечту",
-			curentSum: 50000,
-			targetSum: 1000000,
-			tag: "накопительный счет",
-		},
-		{
-			id: 5,
-			title: "На мечту",
-			curentSum: 50000,
-			targetSum: 1000000,
-			tag: "накопительный счет",
-		},
-		{
-			id: 6,
-			title: "На мечту",
-			curentSum: 50000,
-			targetSum: 1000000,
-			tag: "накопительный счет",
-		},
-	];
+	]);
 
 	const renderItem = ({ item }) => (
 		<View>
@@ -70,7 +50,6 @@ export const TagetScreen = ({ navigation }) => {
 
 	return (
 		<SafeAreaView style={styles.container}>
-			{/* <ScrollView style={styles.scroll}> */}
 			<FlatList
 				style={styles.element}
 				data={data}
@@ -78,7 +57,6 @@ export const TagetScreen = ({ navigation }) => {
 				keyExtractor={(item) => item.id.toString()}
 				scrollEnabled={true}
 			/>
-			{/* </ScrollView> */}
 			<DownButton navigation={navigation} type="target" />
 		</SafeAreaView>
 	);
@@ -89,11 +67,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
-
-	},
-
-	scroll: {
-		flex: 1,
 	},
 
 	element: {

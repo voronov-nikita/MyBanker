@@ -5,14 +5,7 @@
 //
 
 import React, { useState } from "react";
-import {
-	SafeAreaView,
-	View,
-	Text,
-	StyleSheet,
-	ScrollView,
-	FlatList,
-} from "react-native";
+import { SafeAreaView, View, StyleSheet, FlatList } from "react-native";
 
 import { DownButton } from "../buttons/AddButton";
 import { ContainerBank } from "../buttons/ContainerBank";
@@ -20,7 +13,10 @@ import { ContainerBank } from "../buttons/ContainerBank";
 export const MainScreen = ({ navigation }) => {
 	const [data, setData] = useState([
 		{ id: 0, title: "Item 1", curentSum: 1000, tag: "наличные" },
-		{ id: 1, title: "Item 2", curentSum: 1000, tag: "наличные" }
+		{ id: 1, title: "Item 2", curentSum: 1000, tag: "вклад" },
+		{ id: 2, title: "Item 3", curentSum: 1000, tag: "дебетовый счет" },
+		{ id: 3, title: "Item 4", curentSum: 1000, tag: "кредитный счет" },
+		{ id: 4, title: "Item 5", curentSum: 1000, tag: "накопительный счет" },
 	]);
 
 	const renderItem = ({ item }) => (
@@ -31,7 +27,6 @@ export const MainScreen = ({ navigation }) => {
 
 	return (
 		<SafeAreaView style={styles.container}>
-			{/* <ScrollView style={styles.scroll}> */}
 			<FlatList
 				style={styles.element}
 				data={data}
@@ -39,7 +34,6 @@ export const MainScreen = ({ navigation }) => {
 				keyExtractor={(item) => item.id.toString()}
 				scrollEnabled={true}
 			/>
-			{/* </ScrollView> */}
 			<DownButton navigation={navigation} type="home" />
 		</SafeAreaView>
 	);
