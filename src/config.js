@@ -31,17 +31,18 @@ export const COLORS = {
 
 	home: {
 		activeIconColor: "#4CAF50",
-		disactiveIconColor: "gray"
-	}
+		disactiveIconColor: "gray",
+	},
 };
 
 // Хеш таблица с цветовой палитрой для тегов
-export const TAGCOLORS = new Map();
-TAGCOLORS.set("Наличные", "#808080");
-TAGCOLORS.set("Дебетовый счет", "#FFA07A");
-TAGCOLORS.set("Кредитный счет", "#87CEEB");
-TAGCOLORS.set("Накопительный счет", "#FFFF00");
-TAGCOLORS.set("Вклад", "#32CD32");
+export const TAGCOLORS = {
+	наличные: "#808080",
+	"дебетовый счет": "#FFA07A",
+	"кредитный счет": "#87CEEB",
+	"накопительный счет": "#FFFF00",
+	вклад: "#32CD32",
+};
 
 // Иконки
 export const ICONS = {

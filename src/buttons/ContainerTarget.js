@@ -5,16 +5,32 @@
 import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 
-export const ContainerTarget = ({ title, tag, curentSum }) => {
+import { CircularProgressBar } from "../components/ProgressBar";
+import { TAGCOLORS } from "../config";
+
+export const ContainerTarget = ({ data }) => {
 	const visibleInfo = () => {
-		console.log(title, tag, curentSum);
+		console.log(data.title, data.tag, data.curentSum);
+	};
+
+	// функция вычисления процентного соотношения для вычисления пройденного прогресса
+	const calculateProgress = () => {
+		return (data.curentSum / data.targetSum) * 100;
 	};
 
 	return (
 		<TouchableOpacity style={styles.container} onPress={visibleInfo}>
-			<Text>{title}</Text>
-			<Text>{tag}</Text>
-			<Text>{curentSum}</Text>
+			<CircularProgressBar
+				progress={calculateProgress()}
+				bgColor={"rgba(10, 10, 10, 0.1)"}
+				tintColor={TAGCOLORS[data.tag]}
+			/>
+
+			<View style={styles.mainContent}>
+				<Text style={styles.titleText}>{data.title}</Text>
+				<Text style={styles.commentText}>{data.tag}</Text>
+				<Text style={styles.sumText}>{data.curentSum}₽ / {data.targetSum}₽</Text>
+			</View>
 		</TouchableOpacity>
 	);
 };
@@ -29,5 +45,22 @@ const styles = StyleSheet.create({
 
 		justifyContent: "center",
 		alignItems: "center",
+
+		flexDirection: "row",
 	},
+
+	titleText: {
+		fontSize: 18,
+		fontWeight: "bold",
+		textAlign: "center"
+	},
+
+	commentText: {
+		textAlign: "right"
+	},
+
+	sumText: {
+		fontSize: 16,
+		textAlign: "center"
+	}
 });

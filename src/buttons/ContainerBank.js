@@ -5,16 +5,16 @@
 import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 
-export const ContainerBank = ({ title, tag, curentSum }) => {
+export const ContainerBank = ({ data }) => {
 	const visibleInfo = () => {
-		console.log(title, tag, curentSum);
+		console.log(data);
 	};
 
 	return (
 		<TouchableOpacity style={styles.container} onPress={visibleInfo}>
-			<Text>{title}</Text>
-			<Text>{tag}</Text>
-			<Text>{curentSum}</Text>
+			<Text>{data.title}</Text>
+			<Text>{data.tag}</Text>
+			<Text>{data.curentSum}</Text>
 		</TouchableOpacity>
 	);
 };

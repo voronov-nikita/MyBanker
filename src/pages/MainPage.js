@@ -19,36 +19,26 @@ import { ContainerBank } from "../buttons/ContainerBank";
 
 export const MainScreen = ({ navigation }) => {
 	const [data, setData] = useState([
-		{ id: 1, name: "Item 1", sum: 1000 },
-		{ id: 2, name: "Item 2", sum: 21421 },
-		{ id: 3, name: "Item 3", sum: 0 },
-		{ id: 4, name: "Item 3", sum: 0 },
-		{ id: 5, name: "Item 3", sum: 0 },
-		{ id: 6, name: "Item 3", sum: 0 },
-		{ id: 7, name: "Item 3", sum: 0 },
-		{ id: 8, name: "Item 3", sum: 0 },
-		{ id: 9, name: "Item 3", sum: 0 },
-		{ id: 10, name: "Item 3", sum: 0 },
-		{ id: 11, name: "Item 3", sum: 0 },
-		{ id: 12, name: "Item 3", sum: 0 },
+		{ id: 0, title: "Item 1", curentSum: 1000, tag: "наличные" },
+		{ id: 1, title: "Item 2", curentSum: 1000, tag: "наличные" }
 	]);
 
 	const renderItem = ({ item }) => (
 		<View>
-			<ContainerBank title={item.name} tag={"наличные"} curentSum={item.sum} />
+			<ContainerBank data={data[item.id]} />
 		</View>
 	);
 
 	return (
 		<SafeAreaView style={styles.container}>
 			{/* <ScrollView style={styles.scroll}> */}
-				<FlatList
-					style={styles.element}
-					data={data}
-					renderItem={renderItem}
-					keyExtractor={(item) => item.id.toString()}
-					scrollEnabled={true}
-				/>
+			<FlatList
+				style={styles.element}
+				data={data}
+				renderItem={renderItem}
+				keyExtractor={(item) => item.id.toString()}
+				scrollEnabled={true}
+			/>
 			{/* </ScrollView> */}
 			<DownButton navigation={navigation} type="home" />
 		</SafeAreaView>

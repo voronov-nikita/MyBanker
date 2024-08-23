@@ -1,16 +1,15 @@
-// 
+//
 // Компонент круговой шкалы прогресса.
 // Используется для визуализации прогресса накопления цели.
-// 
+//
 
 import React from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 
-
-export const CircularProgressBar = ({progress, bgColor, tintColor}) => {
+export const CircularProgressBar = ({ progress, bgColor, tintColor }) => {
 	return (
-		<View>
+		<View style={styles.container}>
 			<AnimatedCircularProgress
 				size={120}
 				width={15}
@@ -21,4 +20,14 @@ export const CircularProgressBar = ({progress, bgColor, tintColor}) => {
 			/>
 		</View>
 	);
-}
+};
+
+const styles = StyleSheet.create({
+	container: {
+		transform: [
+			{
+				rotate: "90deg",
+			},
+		],
+	},
+});
