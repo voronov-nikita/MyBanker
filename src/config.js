@@ -7,6 +7,9 @@
 
 // Общие конфиги
 export const CONFIG = {
+
+	databaseName: "test.db",
+
 	data: {
 		password: "3907",
 		textQuestion: ["Как звали моего хомяка?"],
