@@ -4,56 +4,79 @@
 // в страницы проекта и логических компонентов
 //
 
-import SQLite from "react-native-sqlite-storage";
+import * as SQLite from "expo-sqlite";
 import { CONFIG } from "../config";
 
-// Открываем или создаем базу данных
-const db = SQLite.openDatabase(
-	{
-		name: CONFIG.databaseName,
-		location: "default",
-	},
-	() => {
-		console.log("Database opened");
-	},
-	(error) => {
-		console.error("Error opening database:", error);
+// функция создания реляционной базы данных для содержания всех отображаемых счетов пользователя
+export const createDatabaseBanks = async (initFunction, initFetch) => {
+	const dbInstance = await SQLite.openDatabaseAsync(CONFIG.databaseName);
+	initFunction(dbInstance);
+
+	await dbInstance.execAsync(`
+        CREATE TABLE IF NOT EXISTS banks (id INTEGER PRIMARY KEY AUTOINCREMENT, 
+		title TEXT, 
+		sum FLOAT,
+		tag TEXT);
+    `);
+
+	initFetch(fetchDataBank(dbInstance));
+};
+
+// функция создания реляционной базы данных для содержания всех отображаемых целей по накоплениям пользователя
+export const createDatabaseTargets = async (initFunction, initFetch) => {
+	const dbInstance = await SQLite.openDatabaseAsync(CONFIG.databaseName);
+	initFunction(dbInstance);
+
+	await dbInstance.execAsync(`
+        CREATE TABLE IF NOT EXISTS targets (id INTEGER PRIMARY KEY AUTOINCREMENT, 
+		title TEXT, 
+		curSum FLOAT,
+		targetSum FLOAT,
+		tag TEXT);
+    `);
+
+	initFetch(fetchDataTargets(dbInstance));
+};
+
+// выбор всех элементов из таблицы счетов
+export const fetchDataBank = async (db) => {
+	if (db) {
+		const allRows = await db.getAllAsync("SELECT * FROM banks");
+		return allRows;
 	}
-);
-
-// Создаем таблицу , если она не существует
-export const createDataBaseBanks = () => {
-	db.transaction((tx) => {
-		tx.executeSql(
-			"CREATE TABLE IF NOT EXISTS banks (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, comment TEXT, sum FLOAT, tag TEXT);",
-			[],
-			(error) => {
-				console.error("Error creating table:", error);
-			}
-		);
-	});
 };
 
-export const createDataBaseTargets = () => {
-	db.transaction((tx) => {
-		tx.executeSql(
-			"CREATE TABLE IF NOT EXISTS targets (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, targetSum FLOAT, curentSum FLOAT, comment TEXT);",
-			[],
-			(error) => {
-				console.error("Error creating table:", error);
-			}
-		);
-	});
+// выбор всех элементов из таблицы целей
+export const fetchDataTargets = async (db) => {
+	if (db) {
+		const allRows = await db.getAllAsync("SELECT * FROM targets");
+		return allRows;
+	}
 };
 
-export const createDataBaseHistory = () => {
-	db.transaction((tx) => {
-		tx.executeSql(
-			"CREATE TABLE IF NOT EXISTS history (id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, time TEXT, sum FLOAT, comment TEXT);",
-			[],
-			(error) => {
-				console.error("Error creating table:", error);
-			}
+// добавить новый элемент в таблицу счетов
+export const addNewBank = async (db, title, sum, tag) => {
+	if (db && title && sum && tag) {
+		await db.runAsync(
+			"INSERT INTO banks (title, sum, tag) VALUES (?, ?, ?)",
+			title,
+			sum,
+			tag
 		);
-	});
+	}
+	return true;
+};
+
+// добавить новый элемент в таблицу целей
+export const addNewTarget = async (db, title, curSum, targetSum, tag) => {
+	if (db && title && targetSum && tag && curSum) {
+		await db.runAsync(
+			"INSERT INTO banks (title, curSum, targetSum, tag) VALUES (?, ?, ?, ?)",
+			title,
+			curSum,
+			targetSum,
+			tag
+		);
+	}
+	return true;
 };
