@@ -15,7 +15,7 @@ import { AddNewBankScreen } from "./src/pages/AddNewBankPage";
 import { AddNewTargetScreen } from "./src/pages/AddNewTargetPage";
 import { ForgotPasswordScreen } from "./src/pages/ForgotPasswordPage";
 
-import Test from "./src/Test";
+import {Test} from "./src/Test";
 // import { loading } from "./src/loadingSettings";
 
 // конфигуратор навигации

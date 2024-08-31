@@ -1,102 +1,53 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, Button, TextInput, FlatList, Alert } from "react-native";
-import SQLite from "react-native-sqlite-storage";
-
-// Открываем или создаем базу данных
-const db = SQLite.openDatabase(
-	{
-		name: "myDatabase.db",
-		location: "default",
-	},
-	() => {
-		console.log("Database opened");
-	},
-	(error) => {
-		console.log("Error: " + error);
-	}
-);
+import React, { useEffect, useState } from "react";
+import { View, Text, Button, FlatList } from "react-native";
+import * as SQLite from "expo-sqlite";
 
 export const Test = () => {
-	const [items, setItems] = useState([]);
-	const [inputValue, setInputValue] = useState("");
+	const [users, setUsers] = useState([]);
+	const [db, setDb] = useState(null);
 
 	useEffect(() => {
-		// Создаем таблицу, если она не существует
-		db.transaction((tx) => {
-			tx.executeSql(
-				"CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY AUTOINCREMENT, value TEXT);",
-				[],
-				() => {
-					console.log("Table created or already exists");
-				},
-				(error) => {
-					console.log("Error: " + error.message);
-				}
-			);
-		});
-
-        setInputValue("1234");
-        addItem();
-		// Загружаем данные из таблицы при запуске приложения
-		loadItems();
+		loadDataBase();
 	}, []);
 
-	// Функция загрузки данных из базы данных
-	const loadItems = () => {
-		db.transaction((tx) => {
-			tx.executeSql(
-				"SELECT * FROM items;",
-				[],
-				(_, { rows }) => {
-					setItems(rows.raw());
-				},
-				(error) => {
-					console.log("Error: " + error.message);
-				}
-			);
-		});
+	const loadDataBase = async () => {
+		const db = await SQLite.openDatabaseAsync("test");
+		db.runAsync(`
+			PRAGMA journal_mode = WAL;
+			CREATE TABLE IF NOT EXISTS test (id INTEGER PRIMARY KEY NOT NULL, value TEXT NOT NULL, intValue INTEGER);
+			INSERT INTO test (value, intValue) VALUES ('test1', 123);
+	`);
+		setDb(db);
 	};
 
-	// Функция для добавления нового элемента в базу данных
-	const addItem = () => {
-		if (inputValue.length === 0) return;
+	const fetchUsers = () => {
+		const res = db.getFirstAsync("SELECT * FROM test");
+		console.log(db);
+		setUsers(res);
+	};
 
-		db.transaction((tx) => {
-			tx.executeSql(
-				"INSERT INTO items (value) VALUES (?);",
-				[inputValue],
-				(_, result) => {
-					if (result.insertId) {
-						setItems((prevItems) => [
-							...prevItems,
-							{ id: result.insertId, value: inputValue },
-						]);
-						setInputValue("");
-					}
-				},
-				(error) => {
-					console.log("Error: " + error.message);
-				}
-			);
-		});
+	const addUser = () => {
+		const res = db.runAsync(
+			"INSERT INTO test (value, intValue) VALUES (?, ?)",
+			"aaa",
+			100
+		);
+		console.log(res, res.lastInsertRowId, res.changes);
+		fetchUsers();
 	};
 
 	return (
 		<View style={{ padding: 20 }}>
-			<TextInput
-				placeholder="Введите значение"
-				value={inputValue}
-				onChangeText={setInputValue}
-				style={{ borderWidth: 1, marginBottom: 10, padding: 5 }}
-			/>
-			<Button title="Добавить элемент" onPress={addItem} />
+			<Button title="Add User" onPress={addUser} />
 			<FlatList
-				data={items}
+				data={users}
 				keyExtractor={(item) => item.id.toString()}
 				renderItem={({ item }) => (
-					<Text style={{ padding: 10 }}>{item.value}</Text>
+					<Text>
+						{item.id}, {item.value} years old
+					</Text>
 				)}
 			/>
 		</View>
-	);
-}
+	); // Ваш основной компонент
+};
