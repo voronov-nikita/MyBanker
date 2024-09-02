@@ -8,31 +8,33 @@ import * as SQLite from "expo-sqlite";
 import { CONFIG } from "../config";
 
 // функция создания реляционной базы данных для содержания всех отображаемых счетов пользователя
-export const createDatabaseBanks = async (initFunction, initFetch) => {
+export const initDatabaseBanks = async (initFunction, initFetch) => {
 	const dbInstance = await SQLite.openDatabaseAsync(CONFIG.databaseName);
 	initFunction(dbInstance);
 
 	await dbInstance.execAsync(`
         CREATE TABLE IF NOT EXISTS banks (id INTEGER PRIMARY KEY AUTOINCREMENT, 
-		title TEXT, 
+		title TEXT NOT NULL, 
 		sum FLOAT,
-		tag TEXT);
+		tag TEXT NOT NULL,
+		comment TEXT);
     `);
 
 	initFetch(fetchDataBank(dbInstance));
 };
 
 // функция создания реляционной базы данных для содержания всех отображаемых целей по накоплениям пользователя
-export const createDatabaseTargets = async (initFunction, initFetch) => {
+export const initDatabaseTargets = async (initFunction, initFetch) => {
 	const dbInstance = await SQLite.openDatabaseAsync(CONFIG.databaseName);
 	initFunction(dbInstance);
 
 	await dbInstance.execAsync(`
         CREATE TABLE IF NOT EXISTS targets (id INTEGER PRIMARY KEY AUTOINCREMENT, 
-		title TEXT, 
+		title TEXT NOT NULL, 
 		curSum FLOAT,
-		targetSum FLOAT,
-		tag TEXT);
+		targetSum FLOAT NOT NULL,
+		tag TEXT NOT NULL,
+		comment TEXT);
     `);
 
 	initFetch(fetchDataTargets(dbInstance));
@@ -55,27 +57,29 @@ export const fetchDataTargets = async (db) => {
 };
 
 // добавить новый элемент в таблицу счетов
-export const addNewBank = async (db, title, sum, tag) => {
+export const addNewBank = async (db, title, sum, tag, comment) => {
 	if (db && title && sum && tag) {
 		await db.runAsync(
-			"INSERT INTO banks (title, sum, tag) VALUES (?, ?, ?)",
+			"INSERT INTO banks (title, sum, tag, comment) VALUES (?, ?, ?, ?)",
 			title,
 			sum,
-			tag
+			tag,
+			comment
 		);
 	}
 	return true;
 };
 
 // добавить новый элемент в таблицу целей
-export const addNewTarget = async (db, title, curSum, targetSum, tag) => {
+export const addNewTarget = async (db, title, curSum, targetSum, tag, comment) => {
 	if (db && title && targetSum && tag && curSum) {
 		await db.runAsync(
-			"INSERT INTO banks (title, curSum, targetSum, tag) VALUES (?, ?, ?, ?)",
+			"INSERT INTO banks (title, curSum, targetSum, tag) VALUES (?, ?, ?, ?, ?)",
 			title,
 			curSum,
 			targetSum,
-			tag
+			tag,
+			comment
 		);
 	}
 	return true;

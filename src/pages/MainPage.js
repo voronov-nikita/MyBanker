@@ -12,7 +12,7 @@ import { ContainerBank } from "../buttons/ContainerBank";
 
 export const MainScreen = ({ navigation }) => {
 	const [data, setData] = useState([
-		{ id: 0, title: "Item 1", curentSum: 1000, tag: "наличные" },
+		{ id: 0, title: "Item 1", sum: 1000, tag: "наличные" },
 		{ id: 1, title: "Item 2", curentSum: 1000, tag: "вклад" },
 		{ id: 2, title: "Item 3", curentSum: 1000, tag: "дебетовый счет" },
 		{ id: 3, title: "Item 4", curentSum: 1000, tag: "кредитный счет" },
