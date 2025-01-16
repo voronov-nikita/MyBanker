@@ -8,8 +8,8 @@
 //
 
 import React, { useState } from "react";
-import { ScrollView, View, Text, TextInput, StyleSheet } from "react-native";
 import { Picker } from "@react-native-picker/picker";
+import { ScrollView, View, Text, TextInput, StyleSheet } from "react-native";
 
 import { CreateButton, FakeCreacteButton } from "../buttons/CreateButton";
 import { CONFIG } from "../config";
@@ -76,16 +76,16 @@ export const AddNewTargetScreen = ({ navigation }) => {
 					))}
 				</Picker>
 
-				<Text style={styles.label}>Коментарии к цели</Text>
+				<Text style={styles.label}>Комментарии к цели</Text>
 				<TextInput
 					style={styles.inputComment}
-					placeholder="Добавьте коментарий"
+					placeholder="Добавьте комментарий"
 					value={comment}
 					onChangeText={(text) => setComment(text)}
 					multiline={true}
 				/>
 			</View>
-			<View style={styles.underButton}>{this.renderButton()}</View>
+			<View style={styles.underButton}>{renderButton()}</View>
 		</ScrollView>
 	);
 };

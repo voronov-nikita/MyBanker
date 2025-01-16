@@ -19,10 +19,14 @@ export const CreateButton = ({
 }) => {
 	const handleCreate = () => {
 		if (type == "AddBank") {
-			console.log(title, tag, TAGCOLORS.get(tag), comment);
+
+			console.log(title, tag, TAGCOLORS[tag], comment);
+
 			navigation.navigate("Main");
 		} else if (type == "AddTarget") {
+
 			console.log(title, tag, TAGCOLORS[tag], comment, targetSum);
+			
 			navigation.navigate("Target");
 		}
 	};

@@ -27,7 +27,7 @@ export const AddNewBankScreen = ({ navigation }) => {
 	]);
 
 	// функция отрисовки кнопки по условию заполнения
-	renderButton = () => {
+	const renderButton = () => {
 		if (title && tag) {
 			return (
 				<CreateButton
@@ -76,7 +76,7 @@ export const AddNewBankScreen = ({ navigation }) => {
 				/>
 			</View>
 			<View style={styles.underButton}>
-				{this.renderButton()}
+				{renderButton()}
 			</View>
 		</ScrollView>
 	);
